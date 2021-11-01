@@ -1,0 +1,8 @@
+# image file
+*.ppm
+*.png
+*.jpg
+
+# documents
+*.txt
+*.pdf
