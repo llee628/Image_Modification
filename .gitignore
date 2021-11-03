@@ -6,3 +6,8 @@
 # documents
 *.txt
 *.pdf
+
+.vscode
+
+*.o
+*.exe
