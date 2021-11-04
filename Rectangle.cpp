@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include "Rectangle.h"
 
 using namespace std;
@@ -17,11 +18,7 @@ Rectangle::Rectangle()
 void Rectangle::setRectangle()
 {
     // intialize the shape of the rectangle
-    rectanglePattern = new int*[recHeight];
-    for (int i = 0; i < recHeight; i++)
-    {
-        rectanglePattern[i] = new int[recWidth];
-    }
+    resizeRec();
 
     // fill the rectangle with 1 first
     for (int i = 0; i < recHeight; i++)
@@ -47,6 +44,64 @@ void Rectangle::setRectangle()
         }
 
     }
+}
+
+bool Rectangle::readPatternFromFile(const string& inputFile)
+{
+    ifstream inFile;
+
+    inFile.open(inputFile.c_str());
+
+    if (inFile.fail())
+    {
+        cout << "Unable to open " << inputFile << "input file!" << endl;
+        return false;
+    }
+
+    // check if the first row of pattern file is valid
+    if (!readPatternWidthHeight(inFile))
+    {
+        return false;
+    }
+
+    // resize the rectangle
+    resizeRec();
+
+    // fill in the pattern from the file
+    for (int i = 0 ; i < recHeight; i++)
+    {
+        for (int j = 0; j < recWidth; j++)
+        {
+            int val;
+            if (readPatternVal(inFile, val))
+            {
+                rectanglePattern[i][j] = val;
+            }
+            else
+            {
+                if (inFile.eof()){
+                    cout << "The number of elements is less than the pattern ";
+                    cout << "size indicates" << endl;
+                }
+                return false;
+            }
+
+        }
+    }
+
+    // if file is not at the end of file here, that means the pixels does not 
+    // match the size indicates.
+    string eofTest;
+    inFile >> eofTest;  // make inFile pointer move one extra word
+    if (!inFile.eof())
+    {
+        cout << "The number of elements is greater than the pattern file ";
+        cout << "indicates" << endl;
+        return false;
+    }
+
+    inFile.close();
+    return true;
 }
 
 void Rectangle::specifyRectangle(
@@ -247,6 +302,30 @@ void Rectangle::specifyRecByCenterAndDim()
     recWidth = 2 * halfWidth;
 }
 
+void Rectangle::setCorner()
+{
+    int upperLeftRow;
+    int upperLeftCol;
+    bool isInputValid = false;
+    // handle the input of upper left corner
+    while (!isInputValid)
+    {
+        cout << "Enter upper left corner row and column: ";
+        isInputValid = handleInputFromKeyboard(upperLeftRow, upperLeftCol);
+
+        if (isInputValid && (upperLeftRow < 0 || upperLeftCol < 0))
+        {
+            cout << "Invalid input value: " << endl;
+            cout << "upper left row and upper left column should be ";
+            cout << "greater and equal to 0." << endl;
+            isInputValid = false;
+        }
+    }
+
+    // set the corner position
+    upperLeftCorner.setRowCol(upperLeftRow, upperLeftCol);
+}
+
 // private methods
 void Rectangle::handleUpLeftCornerInput(int& upperLeftRow, int& upperLeftCol)
 {
@@ -264,5 +343,88 @@ void Rectangle::handleUpLeftCornerInput(int& upperLeftRow, int& upperLeftCol)
             cout << "greater and equal to 0." << endl;
             isInputValid = false;
         }
+    }
+}
+
+bool Rectangle::readPatternWidthHeight(ifstream& inFile)
+{
+    int width;
+    int height;
+
+    // deal with width input
+    inFile >> width;
+    if (!isFileInputValid(inFile, "width"))
+    {
+        return false;
+    }
+
+    // deal with width output
+    inFile >> height;
+    if (!isFileInputValid(inFile, "height"))
+    {
+        return false;
+    }
+
+    if (width < 0)
+    {
+        cout << "Invalid width value: " << width << endl;
+        return false;
+    }
+
+    if (height < 0)
+    {
+        cout << "Invalid height value: " << height << endl;
+        return false;
+    }
+
+    recHeight = height;
+    recWidth = width;
+
+    return true;
+}
+
+bool Rectangle::readPatternVal(ifstream& inFile, int& val)
+{
+    inFile >> val;
+    if (!isFileInputValid(inFile, "pattern element"))
+    {
+        return false;
+    }
+
+    if (val != 0 && val != 1)
+    {
+        cout << "Invalid value of the pattern element: " << val << endl;
+        return false;
+    }
+
+    return true;
+
+}
+
+bool Rectangle::isFileInputValid(ifstream& inFile, const string& eofCase)
+{
+    if (inFile.eof())
+    {
+        cout << "EOF before reading the " << eofCase << endl;
+        return false;
+    }
+    else if (inFile.fail())
+    {
+        inFile.clear();
+        inFile.ignore(BUFFER_CLEAR_NUM, '\n');
+        cout << "Input type error" << endl;
+        return false;
+    }
+
+    return true;
+}
+
+void Rectangle::resizeRec()
+{
+    // intialize the shape of the rectangle
+    rectanglePattern = new int*[recHeight];
+    for (int i = 0; i < recHeight; i++)
+    {
+        rectanglePattern[i] = new int[recWidth];
     }
 }

@@ -1,6 +1,6 @@
 all: project3.exe
 
-project3.o: project3.cpp ColorImageClass.h annotateWithRectangle.h
+project3.o: project3.cpp ColorImageClass.h annotateWithRectangle.h annotatePatternFromFile.h
 	g++ -std=c++98 -Wall -c project3.cpp -o project3.o
 
 ColorImageClass.o: ColorImageClass.cpp ColorClass.h RowColumnClass.h constants.h
@@ -24,8 +24,11 @@ modifyImage.o: modifyImage.cpp modifyImage.h ColorImageClass.h Rectangle.h
 annotateWithRectangle.o: annotateWithRectangle.cpp annotateWithRectangle.h ColorImageClass.h Rectangle.h modifyImage.h
 	g++ -std=c++98 -Wall -c annotateWithRectangle.cpp -o annotateWithRectangle.o
 
-project3.exe: project3.o ColorImageClass.o RowColumnClass.o ColorClass.o handleInputFromKeyboard.o Rectangle.o modifyImage.o annotateWithRectangle.o
-	g++ -std=c++98 project3.o ColorImageClass.o RowColumnClass.o ColorClass.o handleInputFromKeyboard.o Rectangle.o modifyImage.o annotateWithRectangle.o -o project3.exe
+annotatePatternFromFile.o: annotatePatternFromFile.cpp annotatePatternFromFile.h ColorImageClass.h Rectangle.h ColorClass.h modifyImage.h
+	g++ -std=c++98 -Wall -c annotatePatternFromFile.cpp -o annotatePatternFromFile.o
+
+project3.exe: project3.o ColorImageClass.o RowColumnClass.o ColorClass.o handleInputFromKeyboard.o Rectangle.o modifyImage.o annotateWithRectangle.o annotatePatternFromFile.o
+	g++ -std=c++98 project3.o ColorImageClass.o RowColumnClass.o ColorClass.o handleInputFromKeyboard.o Rectangle.o modifyImage.o annotateWithRectangle.o annotatePatternFromFile.o -o project3.exe
 
 clean:
 	rm -f *.o *.exe

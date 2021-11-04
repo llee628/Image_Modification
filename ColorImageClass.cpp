@@ -189,7 +189,6 @@ void ColorImageClass::printImage() const
 bool ColorImageClass::readImageFromFile(const string& inputFile)
 {
     ifstream inFile;
-    bool isSuccess = false;
 
     inFile.open(inputFile.c_str());
 

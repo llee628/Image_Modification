@@ -10,6 +10,7 @@
 #include <string>
 #include "ColorImageClass.h"
 #include "annotateWithRectangle.h"
+#include "annotatePatternFromFile.h"
 
 using namespace std;
 
@@ -27,14 +28,11 @@ int main()
 
     if (baseImage.readImageFromFile(inFileName))
     {
-        // baseImage.printImage();
-        // string outFileName = "outputTest.ppm";
-        // baseImage.writeImageToFile(outFileName);
-
         // handle the main options
         while (!isExit)
         {
             cout << "1. Annotate image with rectangle" << endl;
+            cout << "2. Annotate image with pattern from file" << endl;
             cout << "4. Write out current image" << endl;
             cout << "5. Exit the program" << endl;
 
@@ -44,6 +42,10 @@ int main()
             if (mainMenuOption == "1")
             {
                 annotateWithRectangle(baseImage);
+            }
+            else if (mainMenuOption == "2")
+            {
+                annotatePatternFromFile(baseImage);
             }
             else if (mainMenuOption == "4")
             {

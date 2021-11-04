@@ -21,7 +21,20 @@ class Rectangle
     ColorClass recColor;
     bool isFilled;
 
+    // handle the upper left corner input and handle the errors
     void handleUpLeftCornerInput(int& upperLeftRow, int& upperLeftCol);
+
+    // handle the first row of reading in the pattern file
+    bool readPatternWidthHeight(ifstream& inFile);
+
+    // handle the pattern value reading from file
+    bool readPatternVal(ifstream& inFile, int& val);
+
+    // This method check if the input stats is valid
+    bool isFileInputValid(ifstream& inFile, const string& eofCase);
+
+    // resize the rectangle base on current height and width
+    void resizeRec();
 
   
   public:
@@ -36,6 +49,11 @@ class Rectangle
         This method sets the rectangle pattern based on its data members
     */
     void setRectangle();
+
+    /*
+        This method builds rectangle by the input file
+    */
+    bool readPatternFromFile(const string& inputFile);
 
     /*
         This methods specify the rectangle's width, height, and upper left
@@ -67,6 +85,11 @@ class Rectangle
 
     // This method get the pattern value at location
     int getValAtLocation(const RowColumnClass& inRowCol);
+
+    /*
+        Set the pattern corner position from user input
+    */
+    void setCorner();
 
     /*
         This inline method set the rectangle color with the rhs input

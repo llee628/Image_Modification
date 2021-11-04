@@ -94,7 +94,7 @@ void annotateWithRectangle(ColorImageClass& baseImage)
         else
         {
             cout << "Error option input: the input option should be ";
-            cout << "1 - 3" << endl;
+            cout << "1 - 5" << endl;
         }
     }
 
