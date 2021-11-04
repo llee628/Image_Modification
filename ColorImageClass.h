@@ -22,6 +22,8 @@ class ColorImageClass
     ColorClass** image;
     int imageRowSize;
     int imageColSize;
+    RowColumnClass upperLeftPos;
+    ColorClass transparencyColor;
 
     // This method check if the color value in a pixel is within a valid range
     bool isColorValid(int colorVal);
@@ -99,6 +101,20 @@ class ColorImageClass
     */
     bool getColorAtLocation(RowColumnClass &inRowCol, ColorClass &outColor);
 
+    /*
+        This method set the upper left corner position for the image by user
+        input the position
+    */
+    void setUpLeftPos(int Row, int Col);
+
+    /*
+        This method set the transparency color directly by the rhs color
+    */
+    void setTransColor(const ColorClass& rhs)
+    {
+        transparencyColor.setTo(rhs);
+    }
+
     // This method check if the row and column index are within a valid range
     bool isLocationValid(RowColumnClass &inRowCol);
 
@@ -131,6 +147,16 @@ class ColorImageClass
     ColorClass** getImage() const
     {
         return image;
+    }
+
+    ColorClass getTranColor() const
+    {
+        return transparencyColor;
+    }
+
+    RowColumnClass getUpLeftPos() const
+    {
+        return upperLeftPos;
     }
 };
 

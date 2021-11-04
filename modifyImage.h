@@ -13,6 +13,8 @@
 
 bool modifyImage(ColorImageClass& image, Rectangle& pattern);
 
+bool modifyImage(ColorImageClass& baseImg, ColorImageClass& insertImg);
+
 
 
 

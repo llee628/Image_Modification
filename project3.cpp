@@ -11,6 +11,7 @@
 #include "ColorImageClass.h"
 #include "annotateWithRectangle.h"
 #include "annotatePatternFromFile.h"
+#include "insertImage.h"
 
 using namespace std;
 
@@ -33,6 +34,7 @@ int main()
         {
             cout << "1. Annotate image with rectangle" << endl;
             cout << "2. Annotate image with pattern from file" << endl;
+            cout << "3. Insert another image" << endl;
             cout << "4. Write out current image" << endl;
             cout << "5. Exit the program" << endl;
 
@@ -46,6 +48,10 @@ int main()
             else if (mainMenuOption == "2")
             {
                 annotatePatternFromFile(baseImage);
+            }
+            else if (mainMenuOption == "3")
+            {
+                insertImage(baseImage);
             }
             else if (mainMenuOption == "4")
             {

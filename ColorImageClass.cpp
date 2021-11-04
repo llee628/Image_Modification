@@ -10,12 +10,14 @@ ColorImageClass::ColorImageClass()
     image = NULL;
     imageRowSize = 0;
     imageColSize = 0;
+    upperLeftPos.setRowCol(0, 0);
 }
 
 ColorImageClass::ColorImageClass(int width, int height)
 {
     imageColSize = width;
     imageRowSize = height;
+    upperLeftPos.setRowCol(0, 0);
 
     // dynamic allocate the image
     image = new ColorClass*[imageRowSize];
@@ -149,6 +151,12 @@ bool ColorImageClass::getColorAtLocation(
 
     return true;
 
+}
+
+void ColorImageClass::setUpLeftPos(int Row, int Col)
+{
+    // set the corner position
+    upperLeftPos.setRowCol(Row, Col);
 }
 
 bool ColorImageClass::isLocationValid(RowColumnClass &inRowCol)

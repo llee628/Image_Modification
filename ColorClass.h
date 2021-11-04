@@ -55,7 +55,7 @@ class ColorClass
         This function sets the color's component color values to the same as 
         those in the "inColor" input parameter.
     */
-    bool setTo(ColorClass &inColor);
+    bool setTo(const ColorClass &inColor);
 
     /*
         This function causes each RGB value to have the corresponding value 
@@ -78,6 +78,11 @@ class ColorClass
         RGB value by the adjustment factor provided.
     */
     bool adjustBrightness(double adjFactor);
+
+    /*
+        check if the rhs color is the same as the color of this object
+    */
+    bool isSameColor(const ColorClass& rhs);
 
     // Prints the component color values
     void printComponentValues() const;

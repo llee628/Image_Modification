@@ -63,7 +63,7 @@ bool ColorClass::setTo(int inRed, int inGreen, int inBlue)
 
 }
 
-bool ColorClass::setTo(ColorClass &inColor)
+bool ColorClass::setTo(const ColorClass &inColor)
 {
     return setTo(inColor.redVal, inColor.greenVal, inColor.blueVal);
 }
@@ -112,6 +112,14 @@ bool ColorClass::adjustBrightness(double adjFactor)
     blueVal = clipColor(blueVal, isClipped);
 
     return isClipped;
+}
+
+bool ColorClass::isSameColor(const ColorClass& rhs)
+{
+    int inRed = rhs.getRed();
+    int inGreen = rhs.getGreen();
+    int inBlue = rhs.getBlue();
+    return (redVal == inRed && greenVal == inGreen && blueVal == inBlue);
 }
 
 void ColorClass::printComponentValues() const

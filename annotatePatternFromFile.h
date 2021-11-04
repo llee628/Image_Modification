@@ -3,7 +3,7 @@
 
 /*
     Programmer: Leo Lee
-    Date: Nov 3, 2021
+    Date: Nov 4, 2021
     Purpose: This function allows user to read a pattern from a file and 
     annotates it on the base image
 */
