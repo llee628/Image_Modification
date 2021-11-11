@@ -13,6 +13,10 @@
 #include "ColorClass.h"
 #include "modifyImage.h"
 
+/*
+    This function allows user to read a pattern from a file and 
+    annotates it on the base image
+*/
 void annotatePatternFromFile(ColorImageClass& baseImage);
 
 #endif

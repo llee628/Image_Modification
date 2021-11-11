@@ -13,6 +13,10 @@
 #include "handleInputFromKeyboard.h"
 #include "modifyImage.h"
 
+/*
+    This function allows user to insert another image from a ppm file
+    to the base image
+*/
 void insertImage(ColorImageClass& baseImage);
 
 #endif

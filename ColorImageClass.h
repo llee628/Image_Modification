@@ -133,7 +133,7 @@ class ColorImageClass
     */
     bool writeImageToFile(const string& outputFile);
 
-    // inline get data member methods
+    //////// inline get data member methods ////////////////
     int getImageHeight() const
     {
         return imageRowSize;
@@ -158,6 +158,7 @@ class ColorImageClass
     {
         return upperLeftPos;
     }
+    /////// end of inline get data member methods /////////
 };
 
 

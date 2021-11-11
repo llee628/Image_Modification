@@ -12,6 +12,10 @@
 #include "Rectangle.h"
 #include "modifyImage.h"
 
+/*
+    This function allows user to create a rectangle (filled or not
+    filled) and annotates it on the base image.
+*/
 void annotateWithRectangle(ColorImageClass& baseImage);
 
 

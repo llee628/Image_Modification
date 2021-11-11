@@ -187,7 +187,7 @@ void ColorImageClass::printImage() const
             // don't print "--" when the last element in a row is reached
             if (j != imageColSize - 1)
             {
-                cout<<"--";
+                cout << "--";
             }
         }
         cout<<endl;

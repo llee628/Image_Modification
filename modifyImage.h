@@ -11,8 +11,17 @@
 #include "ColorImageClass.h"
 #include "Rectangle.h"
 
+
+/*
+    This function modify image base on pattern information. If modify 
+    succeed, return true. Otherwise, return false
+*/ 
 bool modifyImage(ColorImageClass& image, Rectangle& pattern);
 
+/*
+    This function modify image base on the insert image. If modify 
+    succeed, return true. Otherwise, return false
+*/ 
 bool modifyImage(ColorImageClass& baseImg, ColorImageClass& insertImg);
 
 

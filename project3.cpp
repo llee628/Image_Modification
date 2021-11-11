@@ -21,7 +21,6 @@ int main()
     string outFileName;
     ColorImageClass baseImage;
     string mainMenuOption;
-    bool isMainOptionValid = false;
     bool isExit = false;
 
     cout << "Enter string for PPM image file name to load: ";
