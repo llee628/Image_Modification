@@ -4,7 +4,8 @@
 /*
     Programmer: Leo Lee
     Date: Nov 3, 2021
-    Purpose: This class represents a rectangle pattern (filled or not filled)
+    Purpose: This class represents a rectangle pattern and not limited to a
+    real rectangle. It could also be a text pattern
 */
 
 #include "RowColumnClass.h"

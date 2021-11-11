@@ -12,6 +12,7 @@
 #include "annotateWithRectangle.h"
 #include "annotatePatternFromFile.h"
 #include "insertImage.h"
+#include "constants.h"
 
 using namespace std;
 
@@ -40,25 +41,25 @@ int main()
             cout << "Enter int for main menu choice: ";
             cin >> mainMenuOption;
 
-            if (mainMenuOption == "1")
+            if (mainMenuOption == ANNOTATE_WITH_RECTANGLE_OPTION)
             {
                 annotateWithRectangle(baseImage);
             }
-            else if (mainMenuOption == "2")
+            else if (mainMenuOption == ANNOTATE_PATTERN_FROM_FILE_OPTION)
             {
                 annotatePatternFromFile(baseImage);
             }
-            else if (mainMenuOption == "3")
+            else if (mainMenuOption == INSERT_ANOTHER_IMAGE_OPTION)
             {
                 insertImage(baseImage);
             }
-            else if (mainMenuOption == "4")
+            else if (mainMenuOption == WRITE_CURRENT_IMAGE_OPTION)
             {
                 cout << "Enter string for PPM file name to output: ";
                 cin >> outFileName;
                 baseImage.writeImageToFile(outFileName);
             }
-            else if (mainMenuOption == "5")
+            else if (mainMenuOption == EXIT_OPTION)
             {
                 cout << "Thank you for using this program" << endl;
                 isExit = true;

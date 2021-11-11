@@ -1,6 +1,6 @@
 all: proj3.exe
 
-project3.o: project3.cpp ColorImageClass.h annotateWithRectangle.h annotatePatternFromFile.h insertImage.h
+project3.o: project3.cpp ColorImageClass.h annotateWithRectangle.h annotatePatternFromFile.h insertImage.h constants.h
 	g++ -std=c++98 -Wall -c project3.cpp -o project3.o
 
 ColorImageClass.o: ColorImageClass.cpp ColorImageClass.h ColorClass.h RowColumnClass.h constants.h

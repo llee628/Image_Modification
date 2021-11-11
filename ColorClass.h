@@ -4,11 +4,13 @@
 /*
     Programmer: Leo Lee
     Date: Nov 3, 2021
-    Purpose: This class represents colors in a pixel
+    Purpose: This code is the interface of the ColorClass
 */
 
 #include "constants.h"
 
+
+// This class represents colors in a pixel
 class ColorClass
 {
   private:

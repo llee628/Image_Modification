@@ -1,3 +1,10 @@
+/*
+    Programmer: Leo Lee
+    Date: Nov 10, 2021
+    Purpose: This code is the implementation of the ColorClass methods
+*/
+
+
 #include <iostream>
 #include "ColorClass.h"
 
@@ -103,9 +110,9 @@ bool ColorClass::adjustBrightness(double adjFactor)
 {
     bool isClipped = false;
 
-    redVal = static_cast<int>(redVal*adjFactor);
-    greenVal = static_cast<int>(greenVal*adjFactor);
-    blueVal = static_cast<int>(blueVal*adjFactor);
+    redVal = static_cast< int >(redVal*adjFactor);
+    greenVal = static_cast< int >(greenVal*adjFactor);
+    blueVal = static_cast< int >(blueVal*adjFactor);
 
     redVal = clipColor(redVal, isClipped);
     greenVal = clipColor(greenVal, isClipped);

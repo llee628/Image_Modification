@@ -1,3 +1,10 @@
+/*
+    Programmer: Leo Lee
+    Date: Nov 10, 2021
+    Purpose: This code provides the implementation of the 
+    handleInputFromKeyboard functions.
+*/
+
 #include <iostream>
 #include "handleInputFromKeyboard.h"
 

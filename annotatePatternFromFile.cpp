@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "annotatePatternFromFile.h"
+#include "constants.h"
 
 using namespace std;
 
@@ -44,31 +45,31 @@ void annotatePatternFromFile(ColorImageClass& baseImage)
         cout << "Enter int for pattern color: ";
         cin >> option;
 
-        if (option == "1")
+        if (option == SET_RED_OPTION)
         {
             patternColor.setToRed();
             pattern.setColor(patternColor);
             isOptionValid = true;
         }
-        else if (option == "2")
+        else if (option == SET_GREEN_OPTION)
         {
             patternColor.setToGreen();
             pattern.setColor(patternColor);
             isOptionValid = true;
         }
-        else if (option == "3")
+        else if (option == SET_BLUE_OPTION)
         {
             patternColor.setToBlue();
             pattern.setColor(patternColor);
             isOptionValid = true;
         }
-        else if (option == "4")
+        else if (option == SET_BLACK_OPTION)
         {
             patternColor.setToBlack();
             pattern.setColor(patternColor);
             isOptionValid = true;
         }
-        else if (option == "5")
+        else if (option == SET_WHITE_OPTION)
         {
             patternColor.setToWhite();
             pattern.setColor(patternColor);

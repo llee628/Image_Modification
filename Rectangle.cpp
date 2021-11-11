@@ -1,3 +1,10 @@
+/*
+    Programmer: Leo Lee
+    Date: Nov 10, 2021
+    Purpose: This code is the implementation of Rectangle class methods
+*/
+
+
 #include <iostream>
 #include <fstream>
 #include "Rectangle.h"

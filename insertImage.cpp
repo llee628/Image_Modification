@@ -77,31 +77,31 @@ void insertImage(ColorImageClass& baseImage)
         cout << "Enter int for transparecy color: ";
         cin >> option;
 
-        if (option == "1")
+        if (option == SET_RED_OPTION)
         {
             transColor.setToRed();
             insertImg.setTransColor(transColor);
             isOptionValid = true;
         }
-        else if (option == "2")
+        else if (option == SET_GREEN_OPTION)
         {
             transColor.setToGreen();
             insertImg.setTransColor(transColor);
             isOptionValid = true;
         }
-        else if (option == "3")
+        else if (option == SET_BLUE_OPTION)
         {
             transColor.setToBlue();
             insertImg.setTransColor(transColor);
             isOptionValid = true;
         }
-        else if (option == "4")
+        else if (option == SET_BLACK_OPTION)
         {
             transColor.setToBlack();
             insertImg.setTransColor(transColor);
             isOptionValid = true;
         }
-        else if (option == "5")
+        else if (option == SET_WHITE_OPTION)
         {
             transColor.setToWhite();
             insertImg.setTransColor(transColor);

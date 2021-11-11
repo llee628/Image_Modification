@@ -107,12 +107,12 @@ bool modifyImage(ColorImageClass& baseImg, ColorImageClass& insertImg)
             RowColumnClass location = insertImg.getUpLeftPos();
             increment.setRowCol(i,j);
             location.addRowColTo(increment);
-            ColorClass InsertImgColor;
-            insertImg.getColorAtLocation(increment, InsertImgColor);
+            ColorClass insertImgColor;
+            insertImg.getColorAtLocation(increment, insertImgColor);
 
-            if (!InsertImgColor.isSameColor(transColor))
+            if (!insertImgColor.isSameColor(transColor))
             {
-                baseImg.setColorAtLocation(location, InsertImgColor);
+                baseImg.setColorAtLocation(location, insertImgColor);
             }
         }
     }

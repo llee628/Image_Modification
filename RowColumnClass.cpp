@@ -1,3 +1,10 @@
+/*
+    Programmer: Leo Lee
+    Date: Nov 3, 2021
+    Purpose: This code is the implementation of RowColumnClass methods
+*/
+
+
 #include <iostream>
 #include "RowColumnClass.h"
 

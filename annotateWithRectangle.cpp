@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "annotateWithRectangle.h"
+#include "constants.h"
 
 using namespace std;
 
@@ -25,17 +26,17 @@ void annotateWithRectangle(ColorImageClass& baseImage)
         cout << "Enter int for rectangle specification method: ";
         cin >> option;
 
-        if (option == "1")
+        if (option == BY_CORNERS_OPTION)
         {
             recPattern.specifyRecByCorners();
             isOptionValid = true;
         }
-        else if (option == "2")
+        else if (option == BY_CORNER_AND_DIM_OPTION)
         {
             recPattern.specifyRecByCornerAndDim();
             isOptionValid = true;
         }
-        else if (option == "3")
+        else if (option == BY_CENTER_AND_DIM_OPTION)
         {
             recPattern.specifyRecByCenterAndDim();
             isOptionValid = true;
@@ -61,31 +62,31 @@ void annotateWithRectangle(ColorImageClass& baseImage)
         cout << "Enter int for rectangle color: ";
         cin >> option;
 
-        if (option == "1")
+        if (option == SET_RED_OPTION)
         {
             recColor.setToRed();
             recPattern.setColor(recColor);
             isOptionValid = true;
         }
-        else if (option == "2")
+        else if (option == SET_GREEN_OPTION)
         {
             recColor.setToGreen();
             recPattern.setColor(recColor);
             isOptionValid = true;
         }
-        else if (option == "3")
+        else if (option == SET_BLUE_OPTION)
         {
             recColor.setToBlue();
             recPattern.setColor(recColor);
             isOptionValid = true;
         }
-        else if (option == "4")
+        else if (option == SET_BLACK_OPTION)
         {
             recColor.setToBlack();
             recPattern.setColor(recColor);
             isOptionValid = true;
         }
-        else if (option == "5")
+        else if (option == SET_WHITE_OPTION)
         {
             recColor.setToWhite();
             recPattern.setColor(recColor);
@@ -109,12 +110,12 @@ void annotateWithRectangle(ColorImageClass& baseImage)
         cout << "Enter int for rectangle fill option: ";
         cin >> option;
 
-        if (option == "1")
+        if (option == NOT_FILLED_OPTION)
         {
             recPattern.setFilled(false);
             isOptionValid = true;
         }
-        else if (option == "2")
+        else if (option == FILLED_OPTION)
         {
             recPattern.setFilled(true);
             isOptionValid = true;

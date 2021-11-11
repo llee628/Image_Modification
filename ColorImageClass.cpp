@@ -1,3 +1,9 @@
+/*
+    Programmer: Leo Lee
+    Date: Nov 10, 2021
+    Purpose: This code is the implementation of the ColorImageClass methods
+*/
+
 #include <iostream>
 #include <fstream>
 #include "ColorImageClass.h"
