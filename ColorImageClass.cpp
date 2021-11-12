@@ -4,9 +4,16 @@
     Purpose: This code is the implementation of the ColorImageClass methods
 */
 
+/*
+    Modification for resubmission:
+    1. call readColorFromFile() method of ColorClass in readImageFromFile
+    2. call writeColorToFile method of ColorClass in writeImageToFile
+*/
+
 #include <iostream>
 #include <fstream>
 #include "ColorImageClass.h"
+#include "isInputValid.h"
 
 
 using namespace std;
@@ -228,20 +235,15 @@ bool ColorImageClass::readImageFromFile(const string& inputFile)
     {
         for (int j = 0; j < imageColSize; j++)
         {
-            ColorClass color;
-            if (readPpmRgb(inFile, color, i, j))
-            {
-                image[i][j].setTo(color);
-            }
-            else
+            if (!image[i][j].readColorFromFile(inFile))
             {
                 if (inFile.eof()){
                     cout << "The number of pixels is lower than the image ";
                     cout << "size" << endl;
                 }
                 return false;
-            }
 
+            }
         }
     }
 
@@ -287,11 +289,7 @@ bool ColorImageClass::writeImageToFile(const string& outputFile)
     {
         for (int j = 0; j < imageColSize; j++)
         {
-            int r = image[i][j].getRed();
-            int g = image[i][j].getGreen();
-            int b = image[i][j].getBlue();
-
-            outFile << r << " " << g << " " << b;
+            image[i][j].writeColorToFile(outFile);
             if (j != imageColSize - 1)
             {
                 outFile << " ";
@@ -307,17 +305,6 @@ bool ColorImageClass::writeImageToFile(const string& outputFile)
 
 
 // Private methods
-
-
-bool ColorImageClass::isColorValid(int colorVal)
-{
-    if (colorVal > COLOR_MAX || colorVal < COLOR_MIN)
-    {
-        return false;
-    }
-
-    return true;
-}
 
 bool ColorImageClass::readPpmFormatMagicNum(ifstream& inFile)
 {
@@ -395,75 +382,4 @@ bool ColorImageClass::readPpmMaxVal(ifstream& inFile)
     return true;
 }
 
-bool ColorImageClass::readPpmRgb(
-    ifstream& inFile, 
-    ColorClass& color, 
-    int row, 
-    int col)
-{
-    int red;
-    int green;
-    int blue;
-
-    inFile >> red;
-    if (!isInputValid(inFile, "red value"))
-    {
-        return false;
-    }
-
-    inFile >> green;
-    if (!isInputValid(inFile, "green value"))
-    {
-        return false;
-    }
-
-    inFile >> blue;
-    if (!isInputValid(inFile, "blue value"))
-    {
-        return false;
-    }
-
-    if (!isColorValid(red))
-    {
-        cout << "Invalid red color: " << red << " ";
-        cout << "at row: " << row << " column: " << col << endl;
-        return false;
-    }
-
-    if (!isColorValid(green))
-    {
-        cout << "Invalid green color: " << green << " ";
-        cout << "at row: " << row << " column: " << col << endl;
-        return false;
-    }
-
-    if (!isColorValid(blue))
-    {
-        cout << "Invalid blue color: " << blue << " ";
-        cout << "at row: " << row << " column: " << col << endl;
-        return false;
-    }
-
-    color.setTo(red, green, blue);
-    return true;
-
-}
-
-bool ColorImageClass::isInputValid(ifstream& inFile, const string& eofCase)
-{
-    if (inFile.eof())
-    {
-        cout << "EOF before reading the " << eofCase << endl;
-        return false;
-    }
-    else if (inFile.fail())
-    {
-        inFile.clear();
-        inFile.ignore(BUFFER_CLEAR_NUM, '\n');
-        cout << "Input type error" << endl;
-        return false;
-    }
-
-    return true;
-}
 

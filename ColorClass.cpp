@@ -4,9 +4,17 @@
     Purpose: This code is the implementation of the ColorClass methods
 */
 
+/*
+    Modification for resubmission:
+    1. add a readColorFromFile method
+    2. add a writeColorToFile method 
+*/
+
 
 #include <iostream>
+#include <fstream>
 #include "ColorClass.h"
+#include "isInputValid.h"
 
 using namespace std;
 
@@ -60,13 +68,19 @@ void ColorClass::setToWhite()
 
 bool ColorClass::setTo(int inRed, int inGreen, int inBlue)
 {
-    bool isClipped = false;
+    
+    if (!checkColorValid(inRed) || 
+        !checkColorValid(inGreen) || 
+        !checkColorValid(inBlue))
+    {
+        return false;
+    }
 
-    redVal = clipColor(inRed, isClipped);
-    greenVal = clipColor(inGreen, isClipped);
-    blueVal = clipColor(inBlue, isClipped);
+    redVal = inRed;
+    greenVal = inGreen;
+    blueVal = inBlue;
 
-    return isClipped;
+    return true;
 
 }
 
@@ -77,48 +91,114 @@ bool ColorClass::setTo(const ColorClass &inColor)
 
 bool ColorClass::addColor(ColorClass &rhs)
 {
-    bool isClipped = false;
+    int newRed = redVal + rhs.redVal;
+    int newGreen = greenVal + rhs.redVal;
+    int newBlue = blueVal + rhs.blueVal;
 
-    redVal += rhs.redVal;
-    greenVal += rhs.greenVal;
-    blueVal += rhs.blueVal;
+    if (!checkColorValid(newRed) || 
+        !checkColorValid(newGreen) || 
+        !checkColorValid(newBlue))
+    {
+        return false;
+    }
 
-    redVal = clipColor(redVal, isClipped);
-    greenVal = clipColor(greenVal, isClipped);
-    blueVal = clipColor(blueVal, isClipped);
+    redVal = newRed;
+    greenVal = newGreen;
+    blueVal = newBlue;
 
-    return isClipped;
+    return true;
 
 }
 
 bool ColorClass::subtractColor(ColorClass &rhs)
 {
-    bool isClipped = false;
+    int newRed = redVal - rhs.redVal;
+    int newGreen = greenVal - rhs.redVal;
+    int newBlue = blueVal - rhs.blueVal;
 
-    redVal -= rhs.redVal;
-    greenVal -= rhs.greenVal;
-    blueVal -= rhs.blueVal;
+    if (!checkColorValid(newRed) || 
+        !checkColorValid(newGreen) || 
+        !checkColorValid(newBlue))
+    {
+        return false;
+    }
 
-    redVal = clipColor(redVal, isClipped);
-    greenVal = clipColor(greenVal, isClipped);
-    blueVal = clipColor(blueVal, isClipped);
+    redVal = newRed;
+    greenVal = newGreen;
+    blueVal = newBlue;
 
-    return isClipped;
+    return true;
 }
 
 bool ColorClass::adjustBrightness(double adjFactor)
 {
-    bool isClipped = false;
+    int newRed = static_cast< int >(redVal * adjFactor);
+    int newGreen = static_cast< int >(greenVal * adjFactor);
+    int newBlue = static_cast< int >(blueVal * adjFactor);
 
-    redVal = static_cast< int >(redVal*adjFactor);
-    greenVal = static_cast< int >(greenVal*adjFactor);
-    blueVal = static_cast< int >(blueVal*adjFactor);
+    if (!checkColorValid(newRed) || 
+        !checkColorValid(newGreen) || 
+        !checkColorValid(newBlue))
+    {
+        return false;
+    }
 
-    redVal = clipColor(redVal, isClipped);
-    greenVal = clipColor(greenVal, isClipped);
-    blueVal = clipColor(blueVal, isClipped);
+    redVal = newRed;
+    greenVal = newGreen;
+    blueVal = newBlue;
 
-    return isClipped;
+    return true;
+}
+
+bool ColorClass::readColorFromFile(ifstream& inFile)
+{
+    int red;
+    int green;
+    int blue;
+
+    inFile >> red;
+    if (!isInputValid(inFile, "red value"))
+    {
+        return false;
+    }
+
+    inFile >> green;
+    if (!isInputValid(inFile, "green value"))
+    {
+        return false;
+    }
+
+    inFile >> blue;
+    if (!isInputValid(inFile, "blue value"))
+    {
+        return false;
+    }
+
+    if (!checkColorValid(red))
+    {
+        cout << "Invalid red color: " << red << endl;
+        return false;
+    }
+
+    if (!checkColorValid(green))
+    {
+        cout << "Invalid green color: " << green << endl;
+        return false;
+    }
+
+    if (!checkColorValid(blue))
+    {
+        cout << "Invalid blue color: " << blue << endl;
+        return false;
+    }
+
+    setTo(red, green, blue);
+    return true;
+}
+
+void ColorClass::writeColorToFile(ofstream& outFile)
+{
+    outFile << redVal << " " << greenVal << " " << blueVal;
 }
 
 bool ColorClass::isSameColor(const ColorClass& rhs)
@@ -126,6 +206,7 @@ bool ColorClass::isSameColor(const ColorClass& rhs)
     int inRed = rhs.getRed();
     int inGreen = rhs.getGreen();
     int inBlue = rhs.getBlue();
+
     return (redVal == inRed && greenVal == inGreen && blueVal == inBlue);
 }
 
@@ -134,18 +215,15 @@ void ColorClass::printComponentValues() const
     cout << "R: " << redVal << " G: " << greenVal << " B: " << blueVal;
 }
 
-int ColorClass::clipColor(const int colorAmount, bool& isClipped)
+
+// private methods
+
+bool ColorClass::checkColorValid(int colorVal)
 {
-    if (colorAmount > COLOR_MAX)
+    if (colorVal > COLOR_MAX || colorVal < COLOR_MIN)
     {
-        isClipped = true;
-        return COLOR_MAX;
-    }
-    else if (colorAmount < COLOR_MIN)
-    {
-        isClipped = true;
-        return COLOR_MIN;
+        return false;
     }
 
-    return colorAmount;
+    return true;
 }

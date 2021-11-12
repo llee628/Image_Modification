@@ -25,9 +25,6 @@ class ColorImageClass
     RowColumnClass upperLeftPos;
     ColorClass transparencyColor;
 
-    // This method check if the color value in a pixel is within a valid range
-    bool isColorValid(int colorVal);
-
     // This method read and check the image format magic number from ppm file
     bool readPpmFormatMagicNum(ifstream& inFile);
 
@@ -36,12 +33,6 @@ class ColorImageClass
 
     // This method read and check the ppm image max value from ppm file
     bool readPpmMaxVal(ifstream& inFile);
-
-    // This method read and check a set of rgb value from ppm file
-    bool readPpmRgb(ifstream& inFile, ColorClass& color, int row, int col);
-
-    // This method check if the input stats is valid
-    bool isInputValid(ifstream& inFile, const string& eofCase);
 
   public:
     /*

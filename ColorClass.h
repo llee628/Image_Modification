@@ -7,6 +7,12 @@
     Purpose: This code is the interface of the ColorClass
 */
 
+/*
+    Modification for resubmission:
+    1. add a readColorFromFile method
+    2. add a writeColorToFile method 
+*/
+
 #include "constants.h"
 
 
@@ -18,12 +24,8 @@ class ColorClass
     int greenVal;
     int blueVal;
 
-    /*
-        This method check if the color value in the valid range, if so, return
-        the origin value. if not, then return the clipped value and set 
-        isClipped true
-    */
-    int clipColor(const int colorAmount, bool& isClipped);
+    // This method check if the color value from a file is within a valid range
+    bool checkColorValid(int colorVal);
 
   public:
     /*
@@ -62,16 +64,16 @@ class ColorClass
     /*
         This function causes each RGB value to have the corresponding value 
         from the input parameter color added to it. If any resulting color 
-        value would end up outside the valid color value range, the value 
-        is "clipped"
+        value would end up outside the valid color value range, the function
+        return false and not change the original value
     */
     bool addColor(ColorClass &rhs);
 
     /*
         This function causes each RGB value to have the corresponding value 
         from the input parameter subtracted from it. If any resulting color 
-        value would end up outside the valid color value range, the value is 
-        "clipped"
+        value would end up outside the valid color value range, the function
+        return false and not change the original value
     */
     bool subtractColor(ColorClass &rhs);
 
@@ -80,6 +82,16 @@ class ColorClass
         RGB value by the adjustment factor provided.
     */
     bool adjustBrightness(double adjFactor);
+
+    /*
+        This method read the rgb values from a file
+    */
+    bool readColorFromFile(ifstream& inFile);
+
+    /*
+        This method write the rgb value to a file
+    */
+    void writeColorToFile(ofstream& outFile);
 
     /*
         check if the rhs color is the same as the color of this object
