@@ -8,12 +8,14 @@
     Modification for resubmission:
     1. call readColorFromFile() method of ColorClass in readImageFromFile
     2. call writeColorToFile method of ColorClass in writeImageToFile
+    3. implement annotateWithRectangle method
 */
 
 #include <iostream>
 #include <fstream>
 #include "ColorImageClass.h"
 #include "isInputValid.h"
+#include "Rectangle.h"
 
 
 using namespace std;
@@ -295,6 +297,132 @@ bool ColorImageClass::writeImageToFile(const string& outputFile)
 
 }
 
+void ColorImageClass::annotateWithRectangle()
+{
+    Rectangle recPattern;
+    ColorClass recColor;
+    string option;
+    bool isOptionValid = false;
+
+    // handle options for specify the rectangle
+    while (!isOptionValid)
+    {
+        cout << "1. Specify upper left and lower right corners of rectangle";
+        cout << endl;
+        cout << "2. Specify upper left corner and dimensions of rectangle";
+        cout << endl;
+        cout << "3. Specify extent from center of rectangle";
+        cout << endl;
+
+        cout << "Enter int for rectangle specification method: ";
+        cin >> option;
+
+        if (option == BY_CORNERS_OPTION)
+        {
+            recPattern.specifyRecByCorners();
+            isOptionValid = true;
+        }
+        else if (option == BY_CORNER_AND_DIM_OPTION)
+        {
+            recPattern.specifyRecByCornerAndDim();
+            isOptionValid = true;
+        }
+        else if (option == BY_CENTER_AND_DIM_OPTION)
+        {
+            recPattern.specifyRecByCenterAndDim();
+            isOptionValid = true;
+        }
+        else
+        {
+            cout << "Error option input: the input option should be ";
+            cout << "1 - 3" << endl;
+        }
+    }
+
+    // handle the rectangle color options
+    isOptionValid = false;
+    while (!isOptionValid)
+    {
+        cout << "1. Red" << endl;
+        cout << "2. Green" << endl;
+        cout << "3. Blue" << endl;
+        cout << "4. Black" << endl;
+        cout << "5. White" << endl;
+
+        cout << "Enter int for rectangle color: ";
+        cin >> option;
+
+        if (option == SET_RED_OPTION)
+        {
+            recColor.setToRed();
+            recPattern.setColor(recColor);
+            isOptionValid = true;
+        }
+        else if (option == SET_GREEN_OPTION)
+        {
+            recColor.setToGreen();
+            recPattern.setColor(recColor);
+            isOptionValid = true;
+        }
+        else if (option == SET_BLUE_OPTION)
+        {
+            recColor.setToBlue();
+            recPattern.setColor(recColor);
+            isOptionValid = true;
+        }
+        else if (option == SET_BLACK_OPTION)
+        {
+            recColor.setToBlack();
+            recPattern.setColor(recColor);
+            isOptionValid = true;
+        }
+        else if (option == SET_WHITE_OPTION)
+        {
+            recColor.setToWhite();
+            recPattern.setColor(recColor);
+            isOptionValid = true;
+        }
+        else
+        {
+            cout << "Error option input: the input option should be ";
+            cout << "1 - 5" << endl;
+        }
+    }
+
+    // handle the rectangle fill option
+    isOptionValid = false;
+    while (!isOptionValid)
+    {
+        cout << "1. No" << endl;
+        cout << "2. Yes" << endl;
+
+        cout << "Enter int for rectangle fill option: ";
+        cin >> option;
+
+        if (option == NOT_FILLED_OPTION)
+        {
+            recPattern.setFilled(false);
+            isOptionValid = true;
+        }
+        else if (option == FILLED_OPTION)
+        {
+            recPattern.setFilled(true);
+            isOptionValid = true;
+        }
+        else
+        {
+            cout << "Error option input: the input option should be ";
+            cout << "1 - 2" << endl;
+        }
+    }
+
+    // make a rectangle pattern
+    recPattern.setRectangle();
+
+    // draw rectangle on the image
+    modifyImage(recPattern);
+}
+
 
 // Private methods
 
@@ -369,6 +497,64 @@ bool ColorImageClass::readPpmMaxVal(ifstream& inFile)
     {
         cout << "Invalid color maximum value" << endl;
         return false;
+    }
+
+    return true;
+}
+
+bool ColorImageClass::modifyImage(const Rectangle& pattern)
+{
+    if (imageRowSize == 0 && imageColSize == 0)
+    {
+        cout << "Error. the color image is empty" << endl;
+        return false;
+    }
+
+    if (pattern.getRecHeight() == 0 && pattern.getRecWidth() == 0)
+    {
+        cout << "The rectangel pattern is empty. Nothing modified" << endl;
+        return true;
+    }
+
+    int patternHeight = pattern.getRecHeight();
+    int patternWidth = pattern.getRecWidth();
+    int** mask = pattern.getImage();
+    RowColumnClass increment;
+
+    // run through the pattern once to make sure the pattern is within a 
+    // valid range
+    for (int i = 0; i < patternHeight; i++)
+    {
+        for (int j = 0; j < patternWidth; j++)
+        {
+            RowColumnClass location = pattern.getUpperLeft();
+            increment.setRowCol(i,j);
+            location.addRowColTo(increment);
+
+            if (!isLocationValid(location))
+            {
+                cout << "error modify the image: the location of the ";
+                cout << "rectangle is out of bound.";
+                return false;
+            }
+        }
+    }
+
+    // if all goes well, then start modify the image
+    for (int i = 0; i < patternHeight; i++)
+    {
+        for (int j = 0; j < patternWidth; j++)
+        {
+            RowColumnClass location = pattern.getUpperLeft();
+            increment.setRowCol(i,j);
+            location.addRowColTo(increment);
+            
+            if (mask[i][j] == 1)
+            {
+                ColorClass recColor = pattern.getColor();
+                setColorAtLocation(location, recColor);
+            }
+        }
     }
 
     return true;

@@ -11,6 +11,8 @@
 /*
     Modification for resubmission:
     1. remove upperLeftPos attribute
+    2. add annotateWithRectangle method and remove the annotateWithRectangle
+       global function
 */
 
 #include <string>
@@ -18,6 +20,7 @@
 #include "ColorClass.h"
 #include "RowColumnClass.h"
 #include "constants.h"
+#include "Rectangle.h"
 
 using namespace std;
 
@@ -37,6 +40,12 @@ class ColorImageClass
 
     // This method read and check the ppm image max value from ppm file
     bool readPpmMaxVal(ifstream& inFile);
+
+    /*
+        This function modify image base on pattern information. If modify 
+        succeed, return true. Otherwise, return false
+    */ 
+    bool modifyImage(const Rectangle& pattern);
 
   public:
     /*
@@ -127,6 +136,12 @@ class ColorImageClass
         return true, otherwise, return false.
     */
     bool writeImageToFile(const string& outputFile);
+
+    /*
+        This function allows user to create a rectangle (filled or not
+        filled) and annotates it on the image.
+    */
+    void annotateWithRectangle();
 
     //////// inline get data member methods ////////////////
     int getImageHeight() const

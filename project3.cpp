@@ -43,7 +43,7 @@ int main()
 
             if (mainMenuOption == ANNOTATE_WITH_RECTANGLE_OPTION)
             {
-                annotateWithRectangle(baseImage);
+                baseImage.annotateWithRectangle();
             }
             else if (mainMenuOption == ANNOTATE_PATTERN_FROM_FILE_OPTION)
             {

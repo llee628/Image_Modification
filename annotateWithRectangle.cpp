@@ -50,7 +50,6 @@ void annotateWithRectangle(ColorImageClass& baseImage)
 
     // handle the rectangle color options
     isOptionValid = false;
-    option = -1;
     while (!isOptionValid)
     {
         cout << "1. Red" << endl;
@@ -101,7 +100,6 @@ void annotateWithRectangle(ColorImageClass& baseImage)
 
     // handle the rectangle fill option
     isOptionValid = false;
-    option = -1;
     while (!isOptionValid)
     {
         cout << "1. No" << endl;

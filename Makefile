@@ -1,6 +1,6 @@
 all: proj3.exe
 
-project3.o: project3.cpp ColorImageClass.h annotateWithRectangle.h annotatePatternFromFile.h insertImage.h constants.h
+project3.o: project3.cpp ColorImageClass.h annotatePatternFromFile.h insertImage.h constants.h
 	g++ -std=c++98 -Wall -c project3.cpp -o project3.o
 
 ColorImageClass.o: ColorImageClass.cpp ColorImageClass.h ColorClass.h RowColumnClass.h constants.h isInputValid.h Rectangle.h
@@ -21,9 +21,6 @@ Rectangle.o: Rectangle.cpp Rectangle.h RowColumnClass.h ColorClass.h handleInput
 modifyImage.o: modifyImage.cpp modifyImage.h ColorImageClass.h Rectangle.h
 	g++ -std=c++98 -Wall -c modifyImage.cpp -o modifyImage.o
 
-annotateWithRectangle.o: annotateWithRectangle.cpp annotateWithRectangle.h ColorImageClass.h Rectangle.h modifyImage.h
-	g++ -std=c++98 -Wall -c annotateWithRectangle.cpp -o annotateWithRectangle.o
-
 annotatePatternFromFile.o: annotatePatternFromFile.cpp annotatePatternFromFile.h ColorImageClass.h Rectangle.h ColorClass.h modifyImage.h
 	g++ -std=c++98 -Wall -c annotatePatternFromFile.cpp -o annotatePatternFromFile.o
 
@@ -33,8 +30,8 @@ insertImage.o: insertImage.cpp insertImage.h ColorImageClass.h ColorClass.h hand
 isInputValid.o: isInputValid.cpp isInputValid.h constants.h
 	g++ -std=c++98 -Wall -c isInputValid.cpp -o isInputValid.o
 
-proj3.exe: project3.o ColorImageClass.o RowColumnClass.o ColorClass.o handleInputFromKeyboard.o Rectangle.o modifyImage.o annotateWithRectangle.o annotatePatternFromFile.o insertImage.o isInputValid.o
-	g++ -std=c++98 project3.o ColorImageClass.o RowColumnClass.o ColorClass.o handleInputFromKeyboard.o Rectangle.o modifyImage.o annotateWithRectangle.o annotatePatternFromFile.o insertImage.o isInputValid.o -o proj3.exe
+proj3.exe: project3.o ColorImageClass.o RowColumnClass.o ColorClass.o handleInputFromKeyboard.o Rectangle.o modifyImage.o annotatePatternFromFile.o insertImage.o isInputValid.o
+	g++ -std=c++98 project3.o ColorImageClass.o RowColumnClass.o ColorClass.o handleInputFromKeyboard.o Rectangle.o modifyImage.o annotatePatternFromFile.o insertImage.o isInputValid.o -o proj3.exe
 
 clean:
 	rm -f *.o *.exe
