@@ -199,7 +199,7 @@ void ColorImageClass::printImage() const
                 cout << "--";
             }
         }
-        cout<<endl;
+        cout << endl;
     }
 }
 

@@ -9,10 +9,10 @@
 
 #include "constants.h"
 
-// handle single int input
+// handle single int input and error check
 bool handleInputFromKeyboard(int& intIn1);
 
-// handle two int inputs
+// handle two int inputs and error check
 bool handleInputFromKeyboard(int& intIn1, int& intIn2);
 
 

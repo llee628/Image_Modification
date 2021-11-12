@@ -51,9 +51,9 @@ class ColorImageClass
     bool modifyImage(const Rectangle& pattern);
 
     /*
-        This function modify image base on the insert image and upper left corner 
-        position of the insert image. If modify succeed, return true. Otherwise, 
-        return false
+        This function modify image base on the insert image and upper left 
+        corner position of the insert image. If modify succeed, return true. 
+        Otherwise, return false
     */ 
     bool modifyImage(ColorImageClass& insertImg, 
                      const RowColumnClass& upperLeftCorner);
