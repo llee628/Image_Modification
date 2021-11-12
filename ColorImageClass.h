@@ -8,6 +8,11 @@
     pixel.s
 */
 
+/*
+    Modification for resubmission:
+    1. remove upperLeftPos attribute
+*/
+
 #include <string>
 #include <fstream>
 #include "ColorClass.h"
@@ -22,7 +27,6 @@ class ColorImageClass
     ColorClass** image;
     int imageRowSize;
     int imageColSize;
-    RowColumnClass upperLeftPos;
     ColorClass transparencyColor;
 
     // This method read and check the image format magic number from ppm file
@@ -145,10 +149,6 @@ class ColorImageClass
         return transparencyColor;
     }
 
-    RowColumnClass getUpLeftPos() const
-    {
-        return upperLeftPos;
-    }
     /////// end of inline get data member methods /////////
 };
 

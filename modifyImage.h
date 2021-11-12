@@ -10,6 +10,7 @@
 
 #include "ColorImageClass.h"
 #include "Rectangle.h"
+#include "RowColumnClass.h"
 
 
 /*
@@ -19,10 +20,13 @@
 bool modifyImage(ColorImageClass& image, Rectangle& pattern);
 
 /*
-    This function modify image base on the insert image. If modify 
-    succeed, return true. Otherwise, return false
+    This function modify image base on the insert image and upper left corner 
+    position of the insert image. If modify succeed, return true. Otherwise, 
+    return false
 */ 
-bool modifyImage(ColorImageClass& baseImg, ColorImageClass& insertImg);
+bool modifyImage(ColorImageClass& baseImg, 
+                 ColorImageClass& insertImg, 
+                 const RowColumnClass& upperLeftCorner);
 
 
 

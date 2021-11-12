@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include "RowColumnClass.h"
 #include "insertImage.h"
 
 using namespace std;
@@ -63,7 +64,8 @@ void insertImage(ColorImageClass& baseImage)
             isInputValid = false;
         }
     }
-    insertImg.setUpLeftPos(upperLeftRow, upperLeftCol);
+    RowColumnClass upperLeftCorner(upperLeftRow, upperLeftCol);
+
 
     // handle the transparency color options
     while (!isOptionValid)
@@ -115,6 +117,6 @@ void insertImage(ColorImageClass& baseImage)
     }
 
     // insert the image
-    modifyImage(baseImage, insertImg);
+    modifyImage(baseImage, insertImg, upperLeftCorner);
 
 }

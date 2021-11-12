@@ -61,7 +61,9 @@ bool modifyImage(ColorImageClass& image, Rectangle& pattern)
     return true;
 }
 
-bool modifyImage(ColorImageClass& baseImg, ColorImageClass& insertImg)
+bool modifyImage(ColorImageClass& baseImg, 
+                 ColorImageClass& insertImg, 
+                 const RowColumnClass& upperLeftCorner)
 {
     if (baseImg.getImageHeight() == 0 && baseImg.getImageWidth() == 0)
     {
@@ -86,7 +88,7 @@ bool modifyImage(ColorImageClass& baseImg, ColorImageClass& insertImg)
     {
         for (int j = 0; j < insertImgWidth; j++)
         {
-            RowColumnClass location = insertImg.getUpLeftPos();
+            RowColumnClass location = upperLeftCorner;
             increment.setRowCol(i,j);
             location.addRowColTo(increment);
 
@@ -104,7 +106,7 @@ bool modifyImage(ColorImageClass& baseImg, ColorImageClass& insertImg)
     {
         for (int j = 0; j < insertImgWidth; j++)
         {
-            RowColumnClass location = insertImg.getUpLeftPos();
+            RowColumnClass location = upperLeftCorner;
             increment.setRowCol(i,j);
             location.addRowColTo(increment);
             ColorClass insertImgColor;
