@@ -143,6 +143,12 @@ class ColorImageClass
     */
     void annotateWithRectangle();
 
+    /*
+        This function allows user to read a pattern from a file and 
+        annotates it on the base image
+    */
+    void annotatePatternFromFile();
+
     //////// inline get data member methods ////////////////
     int getImageHeight() const
     {

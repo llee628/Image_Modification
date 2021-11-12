@@ -423,6 +423,87 @@ void ColorImageClass::annotateWithRectangle()
     modifyImage(recPattern);
 }
 
+void ColorImageClass::annotatePatternFromFile()
+{
+    Rectangle pattern;
+    ColorClass patternColor;
+    string option;
+    string inFileName;
+    bool isOptionValid = false;
+    bool isFileValid = false;
+
+    // handle the file input
+    while (!isFileValid)
+    {
+        cout << "Enter string for file name containing pattern: ";
+        cin >> inFileName;
+
+        if (!pattern.readPatternFromFile(inFileName))
+        {
+            cout << "Fail to load the pattern file. Try again." << endl;
+        }
+        else
+        {
+            isFileValid = true;
+        }
+    }
+
+    // handle the upper left corner input
+    pattern.setCorner();
+
+    // handle the pattern color options
+    while (!isOptionValid)
+    {
+        cout << "1. Red" << endl;
+        cout << "2. Green" << endl;
+        cout << "3. Blue" << endl;
+        cout << "4. Black" << endl;
+        cout << "5. White" << endl;
+
+        cout << "Enter int for pattern color: ";
+        cin >> option;
+
+        if (option == SET_RED_OPTION)
+        {
+            patternColor.setToRed();
+            pattern.setColor(patternColor);
+            isOptionValid = true;
+        }
+        else if (option == SET_GREEN_OPTION)
+        {
+            patternColor.setToGreen();
+            pattern.setColor(patternColor);
+            isOptionValid = true;
+        }
+        else if (option == SET_BLUE_OPTION)
+        {
+            patternColor.setToBlue();
+            pattern.setColor(patternColor);
+            isOptionValid = true;
+        }
+        else if (option == SET_BLACK_OPTION)
+        {
+            patternColor.setToBlack();
+            pattern.setColor(patternColor);
+            isOptionValid = true;
+        }
+        else if (option == SET_WHITE_OPTION)
+        {
+            patternColor.setToWhite();
+            pattern.setColor(patternColor);
+            isOptionValid = true;
+        }
+        else
+        {
+            cout << "Error option input: the input option should be ";
+            cout << "1 - 5" << endl;
+        }
+    }
+
+    // draw pattern on the image
+    modifyImage(pattern);
+}
+
 
 // Private methods
 

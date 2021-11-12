@@ -5,12 +5,18 @@
     differenct functionality to modify the image and write it to ppm file
 */
 
+/*
+    Modification for resubmission:
+    1. call annotateWithRectangle in baseimage's method instead of a global
+       function
+    2. call annotatePatternFromFile in baseimage's method instead of a global
+       function
+*/
+
 
 #include <iostream>
 #include <string>
 #include "ColorImageClass.h"
-#include "annotateWithRectangle.h"
-#include "annotatePatternFromFile.h"
 #include "insertImage.h"
 #include "constants.h"
 
@@ -47,7 +53,7 @@ int main()
             }
             else if (mainMenuOption == ANNOTATE_PATTERN_FROM_FILE_OPTION)
             {
-                annotatePatternFromFile(baseImage);
+                baseImage.annotatePatternFromFile();
             }
             else if (mainMenuOption == INSERT_ANOTHER_IMAGE_OPTION)
             {
