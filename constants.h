@@ -16,6 +16,7 @@ const int COLOR_MAX = 255;
 const int COLOR_MIN = 0;
 const int DEFAULT_ROW_COL = -99999;
 const int BUFFER_CLEAR_NUM = 200;
+const int PATTERN_SIZE_OFFSET = 1;
 
 const string PPM_MAGIC_NUM = "P3";
 

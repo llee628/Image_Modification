@@ -8,6 +8,7 @@
 #include <iostream>
 #include <fstream>
 #include "Rectangle.h"
+#include "constants.h"
 
 using namespace std;
 
@@ -129,6 +130,7 @@ void Rectangle::specifyRecByCorners()
     int lowerRightCol;
     bool isInputValid = false;
     bool isAllInputValid = false;
+    
 
     while (!isAllInputValid)
     {
@@ -168,8 +170,8 @@ void Rectangle::specifyRecByCorners()
 
     // specify the rectangle
     upperLeftCorner.setRowCol(upperLeftRow, upperLeftCol);
-    recWidth = lowerRightCol - upperLeftCol;
-    recHeight = lowerRightRow - upperLeftRow;
+    recWidth = lowerRightCol - upperLeftCol + PATTERN_SIZE_OFFSET;
+    recHeight = lowerRightRow - upperLeftRow + PATTERN_SIZE_OFFSET;
 
 }
 
@@ -220,8 +222,8 @@ void Rectangle::specifyRecByCornerAndDim()
     }
 
     // specify the rectangle
-    recHeight = height;
-    recWidth = width;
+    recHeight = height + PATTERN_SIZE_OFFSET;
+    recWidth = width + PATTERN_SIZE_OFFSET;
     upperLeftCorner.setRowCol(upperLeftRow, upperLeftCol);
 
 }
@@ -305,8 +307,8 @@ void Rectangle::specifyRecByCenterAndDim()
 
     // specify the rectangle
     upperLeftCorner.setRowCol(upperLeftRow, upperLeftCol);
-    recHeight = 2 * halfHeight;
-    recWidth = 2 * halfWidth;
+    recHeight = 2 * halfHeight + PATTERN_SIZE_OFFSET;
+    recWidth = 2 * halfWidth + PATTERN_SIZE_OFFSET;
 }
 
 void Rectangle::setCorner()

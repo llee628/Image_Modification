@@ -3,7 +3,7 @@ all: proj3.exe
 project3.o: project3.cpp ColorImageClass.h annotateWithRectangle.h annotatePatternFromFile.h insertImage.h constants.h
 	g++ -std=c++98 -Wall -c project3.cpp -o project3.o
 
-ColorImageClass.o: ColorImageClass.cpp ColorImageClass.h ColorClass.h RowColumnClass.h constants.h isInputValid.h
+ColorImageClass.o: ColorImageClass.cpp ColorImageClass.h ColorClass.h RowColumnClass.h constants.h isInputValid.h Rectangle.h
 	g++ -std=c++98 -Wall -c ColorImageClass.cpp -o ColorImageClass.o
 
 RowColumnClass.o: RowColumnClass.cpp RowColumnClass.h constants.h
@@ -15,7 +15,7 @@ ColorClass.o: ColorClass.cpp ColorClass.h constants.h isInputValid.h
 handleInputFromKeyboard.o: handleInputFromKeyboard.cpp handleInputFromKeyboard.h constants.h
 	g++ -std=c++98 -Wall -c handleInputFromKeyboard.cpp -o handleInputFromKeyboard.o
 
-Rectangle.o: Rectangle.cpp Rectangle.h RowColumnClass.h ColorClass.h handleInputFromKeyboard.h
+Rectangle.o: Rectangle.cpp Rectangle.h RowColumnClass.h ColorClass.h handleInputFromKeyboard.h constants.h
 	g++ -std=c++98 -Wall -c Rectangle.cpp -o Rectangle.o
 
 modifyImage.o: modifyImage.cpp modifyImage.h ColorImageClass.h Rectangle.h
