@@ -11,13 +11,13 @@
        function
     2. call annotatePatternFromFile in baseimage's method instead of a global
        function
+    3. call insertImage in baseimage's method instead of a global function
 */
 
 
 #include <iostream>
 #include <string>
 #include "ColorImageClass.h"
-#include "insertImage.h"
 #include "constants.h"
 
 using namespace std;
@@ -57,7 +57,7 @@ int main()
             }
             else if (mainMenuOption == INSERT_ANOTHER_IMAGE_OPTION)
             {
-                insertImage(baseImage);
+                baseImage.insertImage();
             }
             else if (mainMenuOption == WRITE_CURRENT_IMAGE_OPTION)
             {

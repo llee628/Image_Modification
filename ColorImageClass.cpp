@@ -9,6 +9,8 @@
     1. call readColorFromFile() method of ColorClass in readImageFromFile
     2. call writeColorToFile method of ColorClass in writeImageToFile
     3. implement annotateWithRectangle method
+    4. implement annotatePatternFromFile method
+    5. implement insertImage method
 */
 
 #include <iostream>
@@ -504,6 +506,122 @@ void ColorImageClass::annotatePatternFromFile()
     modifyImage(pattern);
 }
 
+void ColorImageClass::insertImage()
+{
+    ColorImageClass insertImg;
+    string inFileName;
+    string option;
+    ColorClass transColor;
+    RowColumnClass upperLeftCorner;
+    bool isFileValid = false;
+    bool isInputValid = false;
+    bool isOptionValid = false;
+    int upperLeftRow;
+    int upperLeftCol;
+    int baseImageHeight = imageRowSize;
+    int baseImageWidth = imageColSize;
+    int insertImgHeight;
+    int insertImgWidth;
+
+    // handle the file input
+    while (!isFileValid)
+    {
+        cout << "Enter string for file name of PPM image to insert: ";
+        cin >> inFileName;
+
+        if (!insertImg.readImageFromFile(inFileName))
+        {
+            cout << "Fail to load the pattern file. Try again." << endl;
+        }
+        else
+        {
+            isFileValid = true;
+        }
+
+        // check the insert image size validality
+        insertImgHeight = insertImg.getImageHeight();
+        insertImgWidth = insertImg.getImageWidth();
+
+        if (isFileValid && 
+            (insertImgHeight > baseImageHeight || 
+            insertImgWidth > baseImageWidth))
+        {
+            cout << "Error. The insert image size should not larger than the ";
+            cout << "base image size." << endl;
+            isFileValid = false;
+        }
+    }
+
+    // handle the input of upper left corner
+    while (!isInputValid)
+    {
+        cout << "Enter upper left corner to insert image row and column: ";
+        isInputValid = handleInputFromKeyboard(upperLeftRow, upperLeftCol);
+
+        if (isInputValid && (upperLeftRow < 0 || upperLeftCol < 0))
+        {
+            cout << "Invalid input value: " << endl;
+            cout << "upper left row and upper left column should be ";
+            cout << "greater and equal to 0." << endl;
+            isInputValid = false;
+        }
+    }
+    upperLeftCorner.setRowCol(upperLeftRow, upperLeftCol);
+
+    // handle the transparency color options
+    while (!isOptionValid)
+    {
+        cout << "1. Red" << endl;
+        cout << "2. Green" << endl;
+        cout << "3. Blue" << endl;
+        cout << "4. Black" << endl;
+        cout << "5. White" << endl;
+
+        cout << "Enter int for transparecy color: ";
+        cin >> option;
+
+        if (option == SET_RED_OPTION)
+        {
+            transColor.setToRed();
+            insertImg.setTransColor(transColor);
+            isOptionValid = true;
+        }
+        else if (option == SET_GREEN_OPTION)
+        {
+            transColor.setToGreen();
+            insertImg.setTransColor(transColor);
+            isOptionValid = true;
+        }
+        else if (option == SET_BLUE_OPTION)
+        {
+            transColor.setToBlue();
+            insertImg.setTransColor(transColor);
+            isOptionValid = true;
+        }
+        else if (option == SET_BLACK_OPTION)
+        {
+            transColor.setToBlack();
+            insertImg.setTransColor(transColor);
+            isOptionValid = true;
+        }
+        else if (option == SET_WHITE_OPTION)
+        {
+            transColor.setToWhite();
+            insertImg.setTransColor(transColor);
+            isOptionValid = true;
+        }
+        else
+        {
+            cout << "Error option input: the input option should be ";
+            cout << "1 - 5" << endl;
+        }
+    }
+
+    // insert the image
+    modifyImage(insertImg, upperLeftCorner);
+
+}
+
 
 // Private methods
 
@@ -634,6 +752,66 @@ bool ColorImageClass::modifyImage(const Rectangle& pattern)
             {
                 ColorClass recColor = pattern.getColor();
                 setColorAtLocation(location, recColor);
+            }
+        }
+    }
+
+    return true;
+}
+
+bool ColorImageClass::modifyImage(ColorImageClass& insertImg, 
+                 const RowColumnClass& upperLeftCorner)
+{
+    if (imageRowSize == 0 && imageColSize == 0)
+    {
+        cout << "Error. the base image is empty" << endl;
+        return false;
+    }
+
+    if (insertImg.getImageHeight() == 0 && insertImg.getImageWidth() == 0)
+    {
+        cout << "The insert image is empty. Nothing modified" << endl;
+        return true;
+    }
+
+    int insertImgHeight = insertImg.getImageHeight();
+    int insertImgWidth = insertImg.getImageWidth();
+    ColorClass transColor = insertImg.getTranColor();
+    RowColumnClass increment;
+
+    // run through the insert image once to make sure the image is within a 
+    // valid range of the base image
+    for (int i = 0; i < insertImgHeight; i++)
+    {
+        for (int j = 0; j < insertImgWidth; j++)
+        {
+            RowColumnClass location = upperLeftCorner;
+            increment.setRowCol(i,j);
+            location.addRowColTo(increment);
+
+            if (!isLocationValid(location))
+            {
+                cout << "error insert the image: the location of the ";
+                cout << "image is out of bound.";
+                return false;
+            }
+        }
+    }
+
+    // If all goes well, then start to insert the image
+    for (int i = 0; i < insertImgHeight; i++)
+    {
+        for (int j = 0; j < insertImgWidth; j++)
+        {
+            RowColumnClass location = upperLeftCorner;
+            increment.setRowCol(i,j);
+            location.addRowColTo(increment);
+            ColorClass insertImgColor;
+            insertImg.getColorAtLocation(increment, insertImgColor);
+
+            if (!insertImgColor.isSameColor(transColor))
+            {
+                setColorAtLocation(location, insertImgColor);
             }
         }
     }

@@ -5,7 +5,7 @@
     Programmer: Leo Lee
     Date: Nov 2, 2021
     Purpose: Define a class that represent a image containing RGB value in each
-    pixel.s
+    pixels
 */
 
 /*
@@ -13,6 +13,9 @@
     1. remove upperLeftPos attribute
     2. add annotateWithRectangle method and remove the annotateWithRectangle
        global function
+    3. add annotatePatternFromFile method and remove the 
+       annotatePatternFromFile global function
+    4. add insertImage method and remove the insertImage global function
 */
 
 #include <string>
@@ -46,6 +49,14 @@ class ColorImageClass
         succeed, return true. Otherwise, return false
     */ 
     bool modifyImage(const Rectangle& pattern);
+
+    /*
+        This function modify image base on the insert image and upper left corner 
+        position of the insert image. If modify succeed, return true. Otherwise, 
+        return false
+    */ 
+    bool modifyImage(ColorImageClass& insertImg, 
+                     const RowColumnClass& upperLeftCorner);
 
   public:
     /*
@@ -148,6 +159,12 @@ class ColorImageClass
         annotates it on the base image
     */
     void annotatePatternFromFile();
+
+    /*
+        This function allows user to insert another image from a ppm file
+        to the image
+    */
+    void insertImage();
 
     //////// inline get data member methods ////////////////
     int getImageHeight() const
